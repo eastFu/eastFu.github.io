@@ -49,7 +49,7 @@
 <link rel="shortcut icon" href="/images/favicon.png">
 
 
-<title>归档集- 2017 - Hexo</title>
+<title>Hexo</title>
 
 <meta name="keywords" content="undefined">
 
@@ -125,8 +125,10 @@
 </div>
             <div class="page-title">
     <ul>
-        <li><a href="/" data-name="Home" title="Back Home">Home</a></li>
-        <li><a href="/tags" data-name="Tag Cloud" title="Tag Cloud">Tags</a></li>
+        <li><a href="/">最新</a></li>
+        
+        
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <label for="s" class="sr-only">Input Search key Words Here</label>
@@ -168,33 +170,67 @@
 <div class="main-inner">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-header">
-            <h3 class="post-title">坦率的讲 - 本站目前共计1篇文章</h3>
-        </div>
-        <p><img src="/images/category-bg.jpg" alt="category-bg"></p>
-        <div class="post-content markdown-body" itemprop="articleBody">
-            <div class="archives">
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2017年11月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>26日17:25:22
-                            <a href="/2017/11/26/cmd命令右键菜单/"></a>
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="undefined" target="_blank">
+                    <img width="48" src="undefined" alt="avatar"/>
+                </a>
+                <p><span class="label">作者</span>
+                    <a href="undefined" target="_blank">undefined</a>
+                    <span title="最后编辑于2017-11-26">2017-11-26</span>
+                </p>
+                <p>undefined</p>
+            </div>
+            <h2 class="post-title"></h2>
+            <div class="post-meta">
+                本文总共984个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
-    </article>
-</div>
+        <div class="post-content markdown-body">
+            <h1 id="cmd命令右键菜单"><a href="#cmd命令右键菜单" class="headerlink" title="cmd命令右键菜单"></a>cmd命令右键菜单</h1><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>新建一个xx.reg，将下面的命令粘贴进去，直接双击运行即可。</p>
+<h2 id="添加cmd"><a href="#添加cmd" class="headerlink" title="添加cmd"></a>添加cmd</h2><pre><code>Windows Registry Editor Version 5.00
 
+[HKEY_CLASSES_ROOT\*\shell\mycmd]
+@=&quot;在此处打开CMD&quot;
+
+[HKEY_CLASSES_ROOT\*\shell\mycmd\command]
+@=&quot;cmd.exe /k pushd \&quot;%L\\..\&quot;&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd]
+@=&quot;在此处打开CMD&quot;
+
+[HKEY_CLASSES_ROOT\Folder\shell\mycmd\command]
+@=&quot;cmd.exe /k pushd \&quot;%L\&quot;&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd]
+@=&quot;在此处打开CMD&quot;
+
+[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd\command]
+@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]
+@=&quot;在此处打开CMD&quot;
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd\command]
+@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;
+</code></pre><h2 id="删除cmd"><a href="#删除cmd" class="headerlink" title="删除cmd"></a>删除cmd</h2><pre><code>Windows Registry Editor Version 5.00
+
+[-HKEY_CLASSES_ROOT\*\shell\mycmd]
+[-HKEY_CLASSES_ROOT\Folder\shell\mycmd]
+[-HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]
+</code></pre>
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> 打赏
+            </a>
+        </div>
+        
+        <div class="post-tags">Tags：
+            
+        </div>
+        
+    </article>
+    
+    <p>本文内容仅作为作者个人兴趣与观点，不代表所在公司及团队的观点和决策。若有不恰当之处，望不吝赐教</p>
+    
+    
+</div>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
