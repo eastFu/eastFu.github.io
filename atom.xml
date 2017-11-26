@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>东子的微博</title>
   
-  
+  <subtitle>每天进步一点点</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-26T09:30:44.531Z</updated>
+  <updated>2017-11-26T09:39:59.111Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>东子</name>
     
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>cmd命令右键菜单</title>
     <link href="http://yoursite.com/2017/11/26/cmd%E5%91%BD%E4%BB%A4%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/"/>
     <id>http://yoursite.com/2017/11/26/cmd命令右键菜单/</id>
-    <published>2017-11-26T09:25:22.574Z</published>
-    <updated>2017-11-26T09:30:44.531Z</updated>
+    <published>2017-11-26T09:38:19.000Z</published>
+    <updated>2017-11-26T09:39:59.111Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="cmd命令右键菜单"><a href="#cmd命令右键菜单" class="headerlink" title="cmd命令右键菜单"></a>cmd命令右键菜单</h1><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>新建一个xx.reg，将下面的命令粘贴进去，直接双击运行即可。</p><h2 id="添加cmd"><a href="#添加cmd" class="headerlink" title="添加cmd"></a>添加cmd</h2><pre><code>Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\*\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\\..\&quot;&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\&quot;&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;</code></pre><h2 id="删除cmd"><a href="#删除cmd" class="headerlink" title="删除cmd"></a>删除cmd</h2><pre><code>Windows Registry Editor Version 5.00[-HKEY_CLASSES_ROOT\*\shell\mycmd][-HKEY_CLASSES_ROOT\Folder\shell\mycmd][-HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd][-HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>新建一个xx.reg，将下面的命令粘贴进去，直接双击运行即可。</p><h2 id="添加cmd"><a href="#添加cmd" class="headerlink" title="添加cmd"></a>添加cmd</h2><pre><code>Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\*\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\\..\&quot;&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\&quot;&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;</code></pre><h2 id="删除cmd"><a href="#删除cmd" class="headerlink" title="删除cmd"></a>删除cmd</h2><pre><code>Windows Registry Editor Version 5.00[-HKEY_CLASSES_ROOT\*\shell\mycmd][-HKEY_CLASSES_ROOT\Folder\shell\mycmd][-HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd][-HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;cmd命令右键菜单&quot;&gt;&lt;a href=&quot;#cmd命令右键菜单&quot; class=&quot;headerlink&quot; title=&quot;cmd命令右键菜单&quot;&gt;&lt;/a&gt;cmd命令右键菜单&lt;/h1&gt;&lt;h2 id=&quot;使用方法&quot;&gt;&lt;a href=&quot;#使用方法&quot; class=&quot;headerli
+        &lt;h2 id=&quot;使用方法&quot;&gt;&lt;a href=&quot;#使用方法&quot; class=&quot;headerlink&quot; title=&quot;使用方法&quot;&gt;&lt;/a&gt;使用方法&lt;/h2&gt;&lt;p&gt;新建一个xx.reg，将下面的命令粘贴进去，直接双击运行即可。&lt;/p&gt;
+&lt;h2 id=&quot;添加cmd&quot;&gt;&lt;a href=&quot;#添
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/11/26/hello-world/"/>
+    <id>http://yoursite.com/2017/11/26/hello-world/</id>
+    <published>2017-11-26T06:04:47.385Z</published>
+    <updated>2017-11-26T06:04:47.391Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
       
     
     </summary>
