@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-30T14:42:34.718Z</updated>
+  <updated>2017-11-30T14:44:27.831Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://yoursite.com/2017/11/30/NPM-%E5%AE%89%E8%A3%85%E9%80%9F%E5%BA%A6%E6%85%A2%EF%BC%8C%E9%95%9C%E5%83%8F%E4%BF%AE%E6%94%B9/"/>
     <id>http://yoursite.com/2017/11/30/NPM-安装速度慢，镜像修改/</id>
     <published>2017-11-30T14:39:14.000Z</published>
-    <updated>2017-11-30T14:42:34.718Z</updated>
+    <updated>2017-11-30T14:44:27.831Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="NPM-安装速度慢，镜像修改"><a href="#NPM-安装速度慢，镜像修改" class="headerlink" title="NPM 安装速度慢，镜像修改"></a>NPM 安装速度慢，镜像修改</h1><p>不知道各位是否遇到这种情况，使用NPM（Node.js包管理工具）安装依赖时速度特别慢，为了安装Express，执行命令后两个多小时都没安装成功，最后只能取消安装，笔者20M带宽，应该不是我网络的原因，后来在网上找了好久才找到一种最佳解决办法，在安装时可以手动指定从哪个镜像服务器获取资源，我们可以使用阿里巴巴在国内的镜像服务器，命令如下：</p><pre><code>npm install -gd express --registry=http://registry.npm.taobao.org</code></pre><p>只需要使用–registry参数指定镜像服务器地址，为了避免每次安装都需要–registry参数，可以使用如下命令进行永久设置：</p><pre><code>npm config set registry http://registry.npm.taobao.org</code></pre><p>换了国内镜像，安装速度就很快了，特写篇博客分享这种方法，希望对大家有帮助</p>]]></content>
+    <content type="html"><![CDATA[<p>不知道各位是否遇到这种情况，使用NPM（Node.js包管理工具）安装依赖时速度特别慢，为了安装Express，执行命令后两个多小时都没安装成功，最后只能取消安装，笔者20M带宽，应该不是我网络的原因，后来在网上找了好久才找到一种最佳解决办法，在安装时可以手动指定从哪个镜像服务器获取资源，我们可以使用阿里巴巴在国内的镜像服务器，命令如下：</p><pre><code>npm install -gd express --registry=http://registry.npm.taobao.org</code></pre><p>只需要使用–registry参数指定镜像服务器地址，为了避免每次安装都需要–registry参数，可以使用如下命令进行永久设置：</p><pre><code>npm config set registry http://registry.npm.taobao.org</code></pre><p>换了国内镜像，安装速度就很快了，特写篇博客分享这种方法，希望对大家有帮助</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;NPM-安装速度慢，镜像修改&quot;&gt;&lt;a href=&quot;#NPM-安装速度慢，镜像修改&quot; class=&quot;headerlink&quot; title=&quot;NPM 安装速度慢，镜像修改&quot;&gt;&lt;/a&gt;NPM 安装速度慢，镜像修改&lt;/h1&gt;&lt;p&gt;不知道各位是否遇到这种情况，使用NPM（No
+        &lt;p&gt;不知道各位是否遇到这种情况，使用NPM（Node.js包管理工具）安装依赖时速度特别慢，为了安装Express，执行命令后两个多小时都没安装成功，最后只能取消安装，笔者20M带宽，应该不是我网络的原因，后来在网上找了好久才找到一种最佳解决办法，在安装时可以手动指定从哪个镜像
       
     
     </summary>
