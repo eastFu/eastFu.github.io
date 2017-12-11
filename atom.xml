@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-30T14:44:27.831Z</updated>
+  <updated>2017-12-11T12:47:30.839Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2017/11/30/NPM-%E5%AE%89%E8%A3%85%E9%80%9F%E5%BA%A6%E6%85%A2%EF%BC%8C%E9%95%9C%E5%83%8F%E4%BF%AE%E6%94%B9/"/>
     <id>http://yoursite.com/2017/11/30/NPM-安装速度慢，镜像修改/</id>
     <published>2017-11-30T14:39:14.000Z</published>
-    <updated>2017-11-30T14:44:27.831Z</updated>
+    <updated>2017-12-11T12:47:30.839Z</updated>
     
     <content type="html"><![CDATA[<p>不知道各位是否遇到这种情况，使用NPM（Node.js包管理工具）安装依赖时速度特别慢，为了安装Express，执行命令后两个多小时都没安装成功，最后只能取消安装，笔者20M带宽，应该不是我网络的原因，后来在网上找了好久才找到一种最佳解决办法，在安装时可以手动指定从哪个镜像服务器获取资源，我们可以使用阿里巴巴在国内的镜像服务器，命令如下：</p><pre><code>npm install -gd express --registry=http://registry.npm.taobao.org</code></pre><p>只需要使用–registry参数指定镜像服务器地址，为了避免每次安装都需要–registry参数，可以使用如下命令进行永久设置：</p><pre><code>npm config set registry http://registry.npm.taobao.org</code></pre><p>换了国内镜像，安装速度就很快了，特写篇博客分享这种方法，希望对大家有帮助</p>]]></content>
     
@@ -35,6 +35,8 @@
     </summary>
     
     
+      <category term="其它" scheme="http://yoursite.com/tags/%E5%85%B6%E5%AE%83/"/>
+    
   </entry>
   
   <entry>
@@ -42,7 +44,7 @@
     <link href="http://yoursite.com/2017/11/26/cmd%E5%91%BD%E4%BB%A4%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/"/>
     <id>http://yoursite.com/2017/11/26/cmd命令右键菜单/</id>
     <published>2017-11-26T09:38:19.000Z</published>
-    <updated>2017-11-26T09:39:59.111Z</updated>
+    <updated>2017-12-11T12:47:12.372Z</updated>
     
     <content type="html"><![CDATA[<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>新建一个xx.reg，将下面的命令粘贴进去，直接双击运行即可。</p><h2 id="添加cmd"><a href="#添加cmd" class="headerlink" title="添加cmd"></a>添加cmd</h2><pre><code>Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\*\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\*\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\\..\&quot;&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Folder\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%L\&quot;&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]@=&quot;在此处打开CMD&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd\command]@=&quot;cmd.exe /k pushd \&quot;%V\&quot;&quot;</code></pre><h2 id="删除cmd"><a href="#删除cmd" class="headerlink" title="删除cmd"></a>删除cmd</h2><pre><code>Windows Registry Editor Version 5.00[-HKEY_CLASSES_ROOT\*\shell\mycmd][-HKEY_CLASSES_ROOT\Folder\shell\mycmd][-HKEY_CLASSES_ROOT\DesktopBackground\shell\mycmd][-HKEY_CLASSES_ROOT\Directory\Background\shell\mycmd]</code></pre>]]></content>
     
@@ -57,26 +59,7 @@
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2017/11/26/hello-world/"/>
-    <id>http://yoursite.com/2017/11/26/hello-world/</id>
-    <published>2017-11-26T06:04:47.385Z</published>
-    <updated>2017-11-26T06:04:47.391Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-      
-    
-    </summary>
-    
+      <category term="其它" scheme="http://yoursite.com/tags/%E5%85%B6%E5%AE%83/"/>
     
   </entry>
   
