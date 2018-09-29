@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【转】OAuth 2.0 介绍"><meta name="keywords" content="oauth"><meta name="author" content="EastFu,undefined"><meta name="copyright" content="EastFu"><title>【转】OAuth 2.0 介绍 | EastFu's Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="【转】OAuth 2.0 介绍"><meta name="keywords" content="OAuth"><meta name="author" content="EastFu,undefined"><meta name="copyright" content="EastFu"><title>【转】OAuth 2.0 介绍 | EastFu's Blog</title><link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: undefined,
   copy: {
-    success: 'Copy successfully',
-    error: 'Copy error',
-    noSupport: 'The browser does not support'
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
   }
-} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OAuth"><span class="toc-number">1.</span> <span class="toc-text">OAuth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、应用场景"><span class="toc-number">2.</span> <span class="toc-text">一、应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、名词定义"><span class="toc-number">3.</span> <span class="toc-text">二、名词定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、OAuth的思路"><span class="toc-number">4.</span> <span class="toc-text">三、OAuth的思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、运行流程"><span class="toc-number">5.</span> <span class="toc-text">四、运行流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、客户端的授权模式"><span class="toc-number">6.</span> <span class="toc-text">五、客户端的授权模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、授权码模式"><span class="toc-number">7.</span> <span class="toc-text">六、授权码模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、简化模式"><span class="toc-number">8.</span> <span class="toc-text">七、简化模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、密码模式"><span class="toc-number">9.</span> <span class="toc-text">八、密码模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、客户端模式"><span class="toc-number">10.</span> <span class="toc-text">九、客户端模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、更新令牌"><span class="toc-number">11.</span> <span class="toc-text">十、更新令牌</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.github.com/eastFu/docs/master/blog/hexo/head.jpg"></div><div class="author-info__name text-center">EastFu</div><div class="author-info__description text-center">买个闹钟，以便按时叫醒你</div><div class="follow-button"><a href="https://github.com/eastFu" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">18</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">10</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://ws1.sinaimg.cn/large/8700af19ly1fnp7q2phkzj21hc0xc0yl)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EastFu's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">首页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/me">关于我</a></span></div><div id="post-info"><div id="post-title">【转】OAuth 2.0 介绍</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-09-26</time><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/09/26/OAuth-2-0-介绍/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/09/26/OAuth-2-0-介绍/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="OAuth"><a href="#OAuth" class="headerlink" title="OAuth"></a>OAuth</h3><p><a href="http://https://en.wikipedia.org/wiki/OAuth" target="_blank" rel="noopener">OAuth</a> 是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#OAuth"><span class="toc-number">1.</span> <span class="toc-text">OAuth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、应用场景"><span class="toc-number">2.</span> <span class="toc-text">一、应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、名词定义"><span class="toc-number">3.</span> <span class="toc-text">二、名词定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、OAuth的思路"><span class="toc-number">4.</span> <span class="toc-text">三、OAuth的思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、运行流程"><span class="toc-number">5.</span> <span class="toc-text">四、运行流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、客户端的授权模式"><span class="toc-number">6.</span> <span class="toc-text">五、客户端的授权模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、授权码模式"><span class="toc-number">7.</span> <span class="toc-text">六、授权码模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、简化模式"><span class="toc-number">8.</span> <span class="toc-text">七、简化模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八、密码模式"><span class="toc-number">9.</span> <span class="toc-text">八、密码模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九、客户端模式"><span class="toc-number">10.</span> <span class="toc-text">九、客户端模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#十、更新令牌"><span class="toc-number">11.</span> <span class="toc-text">十、更新令牌</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="https://raw.github.com/eastFu/docs/master/blog/hexo/head.jpg"></div><div class="author-info__name text-center">EastFu</div><div class="author-info__description text-center">买个闹钟，以便按时叫醒你</div><div class="follow-button"><a href="https://github.com/eastFu" target="_blank">Follow Me</a></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">18</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">13</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">5</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://ws1.sinaimg.cn/large/8700af19ly1fnp7q2phkzj21hc0xc0yl)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">EastFu's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">首页</a><a class="site-page" href="/archives">归档</a><a class="site-page" href="/tags">标签</a><a class="site-page" href="/categories">分类</a><a class="site-page" href="/gallery">相册</a></span></div><div id="post-info"><div id="post-title">【转】OAuth 2.0 介绍</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-09-26</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/java开发/">java开发</a><span class="post-meta__separator">|</span><i class="fa fa-comment-o post-meta__icon" aria-hidden="true"></i><a href="/2018/09/26/OAuth-2-0-介绍/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2018/09/26/OAuth-2-0-介绍/"></span></a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">3.7k</span><span class="post-meta__separator">|</span><span>阅读时长: 12 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id="OAuth"><a href="#OAuth" class="headerlink" title="OAuth"></a>OAuth</h3><p><a href="http://https://en.wikipedia.org/wiki/OAuth" target="_blank" rel="noopener">OAuth</a> 是一个关于授权（authorization）的开放网络标准，在全世界得到广泛应用，目前的版本是2.0版。</p>
 <p>本文对OAuth 2.0的设计思路和运行流程，做一个简明通俗的解释，主要参考材料为 <a href="http://http://www.rfcreader.com/#rfc6749" target="_blank" rel="noopener">RFC 6749</a>。</p>
 <p><img src="https://raw.github.com/eastFu/docs/master/blog/oauth/oauth-logo.png" alt="OAuth Logo"></p>
 <h3 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h3><p>为了理解OAuth的适用场合，让我举一个假设的例子。</p>
@@ -86,49 +86,21 @@
 </ul>
 <p>下面是上面这些步骤所需要的参数。</p>
 <p>A步骤中，客户端申请认证的URI，包含以下参数：</p>
-<pre><code>response_type：表示授权类型，必选项，此处的值固定为&quot;code&quot;
-client_id：表示客户端的ID，必选项
-redirect_uri：表示重定向URI，可选项
-scope：表示申请的权限范围，可选项
-state：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>GET /authorize?response_type=code&amp;client_id=s6BhdRkqt3&amp;state=xyz
-        &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
-Host: server.example.com
-</code></pre><p>C步骤中，服务器回应客户端的URI，包含以下参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response_type：表示授权类型，必选项，此处的值固定为&quot;code&quot;</span><br><span class="line">client_id：表示客户端的ID，必选项</span><br><span class="line">redirect_uri：表示重定向URI，可选项</span><br><span class="line">scope：表示申请的权限范围，可选项</span><br><span class="line">state：表示</span><br></pre></td></tr></table></figure>
+<p>客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。</p>
+<p>下面是一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /authorize?response_type=code&amp;client_id=s6BhdRkqt3&amp;state=xyz</span><br><span class="line">        &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br></pre></td></tr></table></figure>
+<p>C步骤中，服务器回应客户端的URI，包含以下参数：</p>
 <p>code：表示授权码，必选项。该码的有效期应该很短，通常设为10分钟，客户端只能使用该码一次，否则会被授权服务器拒绝。该码与客户端ID和重定向URI，是一一对应关系。<br>state：如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。<br>下面是一个例子。</p>
-<pre><code>HTTP/1.1 302 Found
-Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA
-          &amp;state=xyz
-</code></pre><p>D步骤中，客户端向认证服务器申请令牌的HTTP请求，包含以下参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line">Location: https://client.example.com/cb?code=SplxlOBeZQQYbYS6WxSbIA</span><br><span class="line">          &amp;state=xyz</span><br></pre></td></tr></table></figure>
+<p>D步骤中，客户端向认证服务器申请令牌的HTTP请求，包含以下参数：</p>
 <p>grant_type：表示使用的授权模式，必选项，此处的值固定为”authorization_code”。<br>code：表示上一步获得的授权码，必选项。<br>redirect_uri：表示重定向URI，必选项，且必须与A步骤中的该参数值保持一致。<br>client_id：表示客户端ID，必选项。<br>下面是一个例子。</p>
-<pre><code>POST /token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=authorization_code&amp;code=SplxlOBeZQQYbYS6WxSbIA
-&amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb
-</code></pre><p>E步骤中，认证服务器发送的HTTP回复，包含以下参数：</p>
-<pre><code>access_token：表示访问令牌，必选项。
-token_type：表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。
-expires_in：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。
-refresh_token：表示更新令牌，用来获取下一次的访问令牌，可选项。
-scope：表示权限范围，如果与客户端申请的范围一致，此项可省略。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
-  &quot;token_type&quot;:&quot;example&quot;,
-  &quot;expires_in&quot;:3600,
-  &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
-  &quot;example_parameter&quot;:&quot;example_value&quot;
-}
-</code></pre><p>从上面代码可以看到，相关参数使用JSON格式发送（Content-Type: application/json）。此外，HTTP头信息中明确指定不得缓存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">POST /token HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">grant_type=authorization_code&amp;code=SplxlOBeZQQYbYS6WxSbIA</span><br><span class="line">&amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb</span><br></pre></td></tr></table></figure>
+<p>E步骤中，认证服务器发送的HTTP回复，包含以下参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">access_token：表示访问令牌，必选项。</span><br><span class="line">token_type：表示令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。</span><br><span class="line">expires_in：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。</span><br><span class="line">refresh_token：表示更新令牌，用来获取下一次的访问令牌，可选项。</span><br><span class="line">scope：表示权限范围，如果与客户端申请的范围一致，此项可省略。</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"> Content-Type: application/json;charset=UTF-8</span><br><span class="line"> Cache-Control: no-store</span><br><span class="line"> Pragma: no-cache</span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line">   &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,</span><br><span class="line">   &quot;token_type&quot;:&quot;example&quot;,</span><br><span class="line">   &quot;expires_in&quot;:3600,</span><br><span class="line">   &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,</span><br><span class="line">   &quot;example_parameter&quot;:&quot;example_value&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>从上面代码可以看到，相关参数使用JSON格式发送（Content-Type: application/json）。此外，HTTP头信息中明确指定不得缓存。</p>
 <h3 id="七、简化模式"><a href="#七、简化模式" class="headerlink" title="七、简化模式"></a>七、简化模式</h3><p>简化模式（implicit grant type）不通过第三方应用程序的服务器，直接在浏览器中向认证服务器申请令牌，跳过了”授权码”这个步骤，因此得名。所有步骤在浏览器中完成，令牌对访问者是可见的，且客户端不需要认证。</p>
 <p>简化模式</p>
 <p>它的步骤如下：</p>
@@ -150,26 +122,14 @@ Pragma: no-cache
 </ul>
 <p>下面是上面这些步骤所需要的参数。</p>
 <p>A步骤中，客户端发出的HTTP请求，包含以下参数：</p>
-<pre><code>response_type：表示授权类型，此处的值固定为&quot;token&quot;，必选项。
-client_id：表示客户端的ID，必选项。
-redirect_uri：表示重定向的URI，可选项。
-scope：表示权限范围，可选项。
-state：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>GET /authorize?response_type=token&amp;client_id=s6BhdRkqt3&amp;state=xyz
-    &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1
-Host: server.example.com
-</code></pre><p>C步骤中，认证服务器回应客户端的URI，包含以下参数：</p>
-<pre><code>access_token：表示访问令牌，必选项。
-token_type：表示令牌类型，该值大小写不敏感，必选项。
-expires_in：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。
-scope：表示权限范围，如果与客户端申请的范围一致，此项可省略。
-state：如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>HTTP/1.1 302 Found
-Location: http://example.com/cb#access_token=2YotnFZFEjr1zCsicMWpAA
-          &amp;state=xyz&amp;token_type=example&amp;expires_in=3600
-</code></pre><p>在上面的例子中，认证服务器用HTTP头信息的Location栏，指定浏览器重定向的网址。注意，在这个网址的Hash部分包含了令牌。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response_type：表示授权类型，此处的值固定为&quot;token&quot;，必选项。</span><br><span class="line">client_id：表示客户端的ID，必选项。</span><br><span class="line">redirect_uri：表示重定向的URI，可选项。</span><br><span class="line">scope：表示权限范围，可选项。</span><br><span class="line">state：表示客户端的当前状态，可以指定任意值，认证服务器会原封不动地返回这个值。</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET /authorize?response_type=token&amp;client_id=s6BhdRkqt3&amp;state=xyz</span><br><span class="line">    &amp;redirect_uri=https%3A%2F%2Fclient%2Eexample%2Ecom%2Fcb HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br></pre></td></tr></table></figure>
+<p>C步骤中，认证服务器回应客户端的URI，包含以下参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">access_token：表示访问令牌，必选项。</span><br><span class="line">token_type：表示令牌类型，该值大小写不敏感，必选项。</span><br><span class="line">expires_in：表示过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。</span><br><span class="line">scope：表示权限范围，如果与客户端申请的范围一致，此项可省略。</span><br><span class="line">state：如果客户端的请求中包含这个参数，认证服务器的回应也必须一模一样包含这个参数。</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302 Found</span><br><span class="line"> Location: http://example.com/cb#access_token=2YotnFZFEjr1zCsicMWpAA</span><br><span class="line">           &amp;state=xyz&amp;token_type=example&amp;expires_in=3600</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，认证服务器用HTTP头信息的Location栏，指定浏览器重定向的网址。注意，在这个网址的Hash部分包含了令牌。</p>
 <p>根据上面的D步骤，下一步浏览器会访问Location指定的网址，但是Hash部分不会发送。接下来的E步骤，服务提供商的资源服务器发送过来的代码，会提取出Hash中的令牌。</p>
 <h3 id="八、密码模式"><a href="#八、密码模式" class="headerlink" title="八、密码模式"></a>八、密码模式</h3><p>密码模式（Resource Owner Password Credentials Grant）中，用户向客户端提供自己的用户名和密码。客户端使用这些信息，向”服务商提供商”索要授权。</p>
 <p>在这种模式中，用户必须把自己的密码给客户端，但是客户端不得储存密码。这通常用在用户对客户端高度信任的情况下，比如客户端是操作系统的一部分，或者由一个著名公司出品。而认证服务器只有在其他授权模式无法执行的情况下，才能考虑使用这种模式。</p>
@@ -184,31 +144,12 @@ Location: http://example.com/cb#access_token=2YotnFZFEjr1zCsicMWpAA
 </li>
 </ul>
 <p>B步骤中，客户端发出的HTTP请求，包含以下参数：</p>
-<pre><code>grant_type：表示授权类型，此处的值固定为&quot;password&quot;，必选项。
-username：表示用户名，必选项。
-password：表示用户的密码，必选项。
-scope：表示权限范围，可选项。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>POST /token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=password&amp;username=johndoe&amp;password=A3ddj3w
-</code></pre><p>C步骤中，认证服务器向客户端发送访问令牌，下面是一个例子。</p>
-<pre><code>HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
-  &quot;token_type&quot;:&quot;example&quot;,
-  &quot;expires_in&quot;:3600,
-  &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,
-  &quot;example_parameter&quot;:&quot;example_value&quot;
-}
-</code></pre><p>上面代码中，各个参数的含义参见《授权码模式》一节。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grant_type：表示授权类型，此处的值固定为&quot;password&quot;，必选项。</span><br><span class="line">username：表示用户名，必选项。</span><br><span class="line">password：表示用户的密码，必选项。</span><br><span class="line">scope：表示权限范围，可选项。</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /token HTTP/1.1</span><br><span class="line"> Host: server.example.com</span><br><span class="line"> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW</span><br><span class="line"> Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line"> grant_type=password&amp;username=johndoe&amp;password=A3ddj3w</span><br></pre></td></tr></table></figure>
+<p>C步骤中，认证服务器向客户端发送访问令牌，下面是一个例子。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"> Content-Type: application/json;charset=UTF-8</span><br><span class="line"> Cache-Control: no-store</span><br><span class="line"> Pragma: no-cache</span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line">   &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,</span><br><span class="line">   &quot;token_type&quot;:&quot;example&quot;,</span><br><span class="line">   &quot;expires_in&quot;:3600,</span><br><span class="line">   &quot;refresh_token&quot;:&quot;tGzv3JOkF0XG5Qx2TlKWIA&quot;,</span><br><span class="line">   &quot;example_parameter&quot;:&quot;example_value&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，各个参数的含义参见《授权码模式》一节。</p>
 <p>整个过程中，客户端不得保存用户的密码。</p>
 <h3 id="九、客户端模式"><a href="#九、客户端模式" class="headerlink" title="九、客户端模式"></a>九、客户端模式</h3><p>客户端模式（Client Credentials Grant）指客户端以自己的名义，而不是以用户的名义，向”服务提供商”进行认证。严格地说，客户端模式并不属于OAuth框架所要解决的问题。在这种模式中，用户直接向客户端注册，客户端以自己的名义要求”服务提供商”提供服务，其实不存在授权问题。</p>
 <p>客户端模式</p>
@@ -221,41 +162,19 @@ Pragma: no-cache
 </ul>
 <p>A步骤中，客户端发出的HTTP请求，包含以下参数：</p>
 <p>granttype：表示授权类型，此处的值固定为”clientcredentials”，必选项。<br>scope：表示权限范围，可选项。</p>
-<pre><code>POST /token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=client_credentials
-</code></pre><p>认证服务器必须以某种方式，验证客户端身份。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /token HTTP/1.1</span><br><span class="line"> Host: server.example.com</span><br><span class="line"> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW</span><br><span class="line"> Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line"> grant_type=client_credentials</span><br></pre></td></tr></table></figure>
+<p>认证服务器必须以某种方式，验证客户端身份。</p>
 <p>B步骤中，认证服务器向客户端发送访问令牌，下面是一个例子。</p>
-<pre><code>HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,
-  &quot;token_type&quot;:&quot;example&quot;,
-  &quot;expires_in&quot;:3600,
-  &quot;example_parameter&quot;:&quot;example_value&quot;
-}
-</code></pre><p>上面代码中，各个参数的含义参见《授权码模式》一节。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"> Content-Type: application/json;charset=UTF-8</span><br><span class="line"> Cache-Control: no-store</span><br><span class="line"> Pragma: no-cache</span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line">   &quot;access_token&quot;:&quot;2YotnFZFEjr1zCsicMWpAA&quot;,</span><br><span class="line">   &quot;token_type&quot;:&quot;example&quot;,</span><br><span class="line">   &quot;expires_in&quot;:3600,</span><br><span class="line">   &quot;example_parameter&quot;:&quot;example_value&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，各个参数的含义参见《授权码模式》一节。</p>
 <h3 id="十、更新令牌"><a href="#十、更新令牌" class="headerlink" title="十、更新令牌"></a>十、更新令牌</h3><p>如果用户访问的时候，客户端的”访问令牌”已经过期，则需要使用”更新令牌”申请一个新的访问令牌。</p>
 <p>客户端发出更新令牌的HTTP请求，包含以下参数：</p>
-<pre><code>granttype：表示使用的授权模式，此处的值固定为&quot;refreshtoken&quot;，必选项。
-refresh_token：表示早前收到的更新令牌，必选项。
-scope：表示申请的授权范围，不可以超出上一次申请的范围，如果省略该参数，则表示与上一次一致。
-</code></pre><p>下面是一个例子。</p>
-<pre><code>POST /token HTTP/1.1
-Host: server.example.com
-Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=refresh_token&amp;refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
-</code></pre><p>（完）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">granttype：表示使用的授权模式，此处的值固定为&quot;refreshtoken&quot;，必选项。</span><br><span class="line">refresh_token：表示早前收到的更新令牌，必选项。</span><br><span class="line">scope：表示申请的授权范围，不可以超出上一次申请的范围，如果省略该参数，则表示与上一次一致。</span><br></pre></td></tr></table></figure>
+<p>下面是一个例子。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">POST /token HTTP/1.1</span><br><span class="line"> Host: server.example.com</span><br><span class="line"> Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW</span><br><span class="line"> Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line"> grant_type=refresh_token&amp;refresh_token=tGzv3JOkF0XG5Qx2TlKWIA</span><br></pre></td></tr></table></figure>
+<p>（完）</p>
 <p>原文转载地址： <a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html</a></p>
-</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">EastFu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://eastFu.top/2018/09/26/OAuth-2-0-介绍/">http://eastFu.top/2018/09/26/OAuth-2-0-介绍/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/oauth/">oauth</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/09/27/一款非常好用的markdown编辑器-Haroopad/"><i class="fa fa-chevron-left">  </i><span>一款非常好用的markdown编辑器 : Haroopad</span></a></div><div class="next-post pull-right"><a href="/2018/09/25/Spring-Boot-中的-banner-txt/"><span>Spring Boot 中的 banner.txt</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"></div><div id="disqus_thread"></div><script>var unused = null;
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">EastFu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://eastFu.top/2018/09/26/OAuth-2-0-介绍/">http://eastFu.top/2018/09/26/OAuth-2-0-介绍/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://eastFu.top" target="_blank">EastFu's Blog</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/OAuth/">OAuth</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2018/09/27/一款非常好用的markdown编辑器-Haroopad/"><i class="fa fa-chevron-left">  </i><span>一款非常好用的markdown编辑器 : Haroopad</span></a></div><div class="next-post pull-right"><a href="/2018/09/25/Spring-Boot-中的-banner-txt/"><span>Spring Boot 中的 banner.txt</span><i class="fa fa-chevron-right"></i></a></div></nav><div class="post-adv"></div><div id="disqus_thread"></div><script>var unused = null;
 var disqus_config = function () {
   this.page.url = 'http://eastFu.top/2018/09/26/OAuth-2-0-介绍/';
   this.page.identifier = '2018/09/26/OAuth-2-0-介绍/';
@@ -264,4 +183,4 @@ var disqus_config = function () {
 var d = document, s = d.createElement('script');
 s.src = "https://" + 'EastFu' +".disqus.com/embed.js";
 s.setAttribute('data-timestamp', '' + +new Date());
-(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://EastFu.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2018 By EastFu</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://EastFu.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2011 - 2018 By EastFu</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
