@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>swing实现横向滚动窗口 | Hexo</title>
+    
+    
+        <meta name="keywords" content="编程" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="介绍上网看视频的时候都看见过，一个视频滚动的窗体，通过点击按钮视频可以产生横向滚动效果，下面自己用swing写了一个类似的功能窗口。 效果图： 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676">
+<meta name="keywords" content="编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swing实现横向滚动窗口">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;wiki&#x2F;swing%E5%AE%9E%E7%8E%B0%E6%A8%AA%E5%90%91%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍上网看视频的时候都看见过，一个视频滚动的窗体，通过点击按钮视频可以产生横向滚动效果，下面自己用swing写了一个类似的功能窗口。 效果图： 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.github.com&#x2F;eastFu&#x2F;docs&#x2F;master&#x2F;blog&#x2F;swing&#x2F;swing.png">
+<meta property="og:updated_time" content="2019-11-22T05:28:43.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.github.com&#x2F;eastFu&#x2F;docs&#x2F;master&#x2F;blog&#x2F;swing&#x2F;swing.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            编程
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/IDEA%E7%89%88%E6%9C%AC-Ultimate%E3%80%81Community%E3%80%81EAP/">IDEA版本: Ultimate、Community、EAP</a></li>  <li class="file"><a href="/wiki/markdown%E7%BC%96%E8%BE%91%E5%99%A8-Haroopad/">markdown编辑器:Haroopad</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">java正则表达式</a></li>  <li class="file active"><a href="/wiki/swing%E5%AE%9E%E7%8E%B0%E6%A8%AA%E5%90%91%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3/">swing实现横向滚动窗口</a></li>  <li class="file"><a href="/wiki/%E4%BD%BF%E7%94%A8jxl%E5%AF%BC%E5%87%BAexcel/">使用jxl导出excel</a></li>  <li class="file"><a href="/wiki/java%E5%AF%B9xml%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C/">java对xml文件的操作</a></li>  <li class="file"><a href="/wiki/hibernate%E6%8F%92%E5%85%A5mysql%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">hibernate插入mysql中文乱码问题</a></li>  <li class="file"><a href="/wiki/%E5%85%B3%E4%BA%8Espring-mvc%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/">关于spring mvc请求乱码问题分析</a></li>  <li class="file"><a href="/wiki/%E7%B2%BE%E7%AE%80JRE/">精简JRE</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Node.js
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E8%A7%A3%E5%86%B3npm%E5%AE%89%E8%A3%85%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决npm安装速度慢的问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OAuth
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/OAuth-2-0%E4%BB%8B%E7%BB%8D-%E8%BD%AC/">OAuth 2.0介绍[转]</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E8%B8%A9%E5%9D%91-python-base64/">踩坑:python base64</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E5%88%9D%E8%AF%86RabbitMQ/">初识RabbitMQ</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%B8%80-Linux%E7%8E%AF%E5%A2%83%E4%B8%8Bredis%E7%9A%84%E5%AE%89%E8%A3%85/">入门(一)Linux环境下redis的安装</a></li>  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%BA%8C-Windows%E7%8E%AF%E5%A2%83%E4%B8%8Bredis%E7%9A%84%E5%AE%89%E8%A3%85/">入门(二)Windows环境下redis的安装</a></li>  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%B8%89-%E8%AF%A6%E8%A7%A3redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">入门(三)详解redis配置文件</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/zookeeper%E7%9A%84%E6%96%AD%E7%BA%BF%E9%87%8D%E8%BF%9E%E5%AE%9E%E7%8E%B0/">zookeeper的断线重连实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/Spring-Boot%E4%B8%AD%E7%9A%84banner-txt/">spring boot中的banner.txt</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            其它
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/cmd%E5%91%BD%E4%BB%A4%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/">cmd命令右键菜单</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            安全
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E8%81%8A%E4%B8%80%E8%81%8A%E5%B8%B8%E7%94%A8%E7%9A%84%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F/">聊一聊常用的登录认证方式</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            正则表达式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">正则表达式的那些事儿</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTTP%E5%92%8CWebSocket/">深入浅出Http和WebSocket</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-swing实现横向滚动窗口" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/Java/">Java</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/swing%E5%AE%9E%E7%8E%B0%E6%A8%AA%E5%90%91%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+            <time datetime="2013-02-26T02:24:57.000Z" itemprop="datePublished">2013-02-26</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/raw/writing/source/_posts/swing实现横向滚动窗口.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/edit/writing/source/_posts/swing实现横向滚动窗口.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/commits/writing/source/_posts/swing实现横向滚动窗口.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            swing实现横向滚动窗口
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>上网看视频的时候都看见过，一个视频滚动的窗体，通过点击按钮视频可以产生横向滚动效果，下面自己用swing写了一个类似的功能窗口。</p>
+<p>效果图：<br><img src="https://raw.github.com/eastFu/docs/master/blog/swing/swing.png" alt="效果图"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">import java.awt.BorderLayout;</span><br><span class="line">import java.awt.Color;</span><br><span class="line">import java.awt.Dimension;</span><br><span class="line">import java.awt.FlowLayout;</span><br><span class="line">import java.awt.event.ActionEvent;</span><br><span class="line">import java.awt.event.ActionListener;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import javax.swing.ImageIcon;</span><br><span class="line">import javax.swing.JButton;</span><br><span class="line">import javax.swing.JFrame;</span><br><span class="line">import javax.swing.JLabel;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line">import javax.swing.JScrollPane;</span><br><span class="line">import javax.swing.ScrollPaneConstants;</span><br><span class="line">import javax.swing.Timer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class RollingFrame extends JFrame&#123;</span><br><span class="line"></span><br><span class="line">    private static final int LIST_CELL_WIDTH = 120;// 每次滚一次的 刻度</span><br><span class="line">    private static int y = 0;// 滚动轴滑动的刻度</span><br><span class="line"></span><br><span class="line">    private JScrollPane sp;</span><br><span class="line">    private static int index = 0; // 用来 计数，算的开始滚动到最后滚动的y</span><br><span class="line">    private int currentResolution = 20; // 动画效果，50毫秒</span><br><span class="line">    private Timer timer1 = null, timer2 = null;// 两个timer 用于 操作两个监听事件</span><br><span class="line"></span><br><span class="line">    private int moveMinX;// 每次滚动的开始刻度</span><br><span class="line">    private int moveMaxX;// 每次滚动的结束刻度</span><br><span class="line">    private static int max;// 计算滚动面板的滚动轴的最大滑动刻度</span><br><span class="line"></span><br><span class="line">    private JPanel j,centerPanel,statusPanel,scollPanel; // 定义一个面板。用于将节点添加到面板上，并将j天津到滚动面板上</span><br><span class="line"></span><br><span class="line">    private JButton leftButton,rightButton;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public RollingFrame()</span><br><span class="line">    &#123;</span><br><span class="line">        // TODO Auto-generated constructor stub</span><br><span class="line">        setBackground(Color.WHITE);</span><br><span class="line">        initGui();</span><br><span class="line">        setTitle(&quot;横向滚动&quot;);</span><br><span class="line">        setBounds(100, 100, 365, 80);</span><br><span class="line">        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">        setVisible(true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initGui()</span><br><span class="line">    &#123;</span><br><span class="line">        // 初始化操作，将各个组件和节点添加到面板中</span><br><span class="line">        setLayout(new BorderLayout(0, 0));</span><br><span class="line">        add(getLeftButton(), BorderLayout.WEST);</span><br><span class="line">        add(getRightButton(), BorderLayout.EAST);</span><br><span class="line">        add(getSp(), BorderLayout.CENTER);</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义滚动面板，将j 和滚动条添加进去</span><br><span class="line">    private JScrollPane getSp()&#123;</span><br><span class="line">        if(j==null)&#123;</span><br><span class="line">            j = new JPanel();</span><br><span class="line">            j.setBackground(Color.WHITE);</span><br><span class="line">            j.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));</span><br><span class="line">            for(int i=0;i&lt;15;i++)&#123;</span><br><span class="line">                j.add(new JButton(&quot;按钮：&quot;+i));</span><br><span class="line">            &#125;</span><br><span class="line">            sp = new JScrollPane(j, ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,</span><br><span class="line">                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);</span><br><span class="line">            sp.setBackground(Color.WHITE);</span><br><span class="line">        &#125;</span><br><span class="line">        return sp;</span><br><span class="line">    &#125;</span><br><span class="line">    // 得到向左滑动按钮</span><br><span class="line">    public JButton getLeftButton()</span><br><span class="line">    &#123;</span><br><span class="line">        if (leftButton == null)</span><br><span class="line">        &#123;</span><br><span class="line">            leftButton = new JButton(&quot;&lt;&lt;&quot;);</span><br><span class="line">            leftButton.setBorder(null);</span><br><span class="line">            leftButton.setContentAreaFilled(false);</span><br><span class="line">            leftButton.setFocusPainted(false);</span><br><span class="line">        &#125;</span><br><span class="line">        leftButton.addActionListener(new ActionListener()</span><br><span class="line">        &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void actionPerformed(ActionEvent arg0)</span><br><span class="line">            &#123;</span><br><span class="line">                max = sp.getHorizontalScrollBar().getMaximum()</span><br><span class="line">                        - sp.getHorizontalScrollBar().getModel().getExtent();// 得到滚动轴</span><br><span class="line">                                                                                // 最大滑动刻度</span><br><span class="line">                moveMinX = (index - 1) * LIST_CELL_WIDTH &gt; max ? max</span><br><span class="line">                        : (index - 1) * LIST_CELL_WIDTH;</span><br><span class="line">                moveMaxX = index * LIST_CELL_WIDTH &gt; max ? max : index</span><br><span class="line">                        * LIST_CELL_WIDTH;</span><br><span class="line">                if (moveMaxX &gt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (timer1 == null)</span><br><span class="line">                    &#123;</span><br><span class="line">                        timer1 = new Timer(currentResolution, action1);</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (!timer1.isRunning())</span><br><span class="line">                    &#123;</span><br><span class="line">                        timer1.start();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        leftButton.setPreferredSize(new Dimension(48, 50));</span><br><span class="line">        return leftButton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 得到向右滑动按钮</span><br><span class="line">    public JButton getRightButton()</span><br><span class="line">    &#123;</span><br><span class="line">        if (rightButton == null)</span><br><span class="line">        &#123;</span><br><span class="line">            rightButton = new JButton(&quot;&gt;&gt;&quot;);</span><br><span class="line">            rightButton.setBorder(null);</span><br><span class="line">            rightButton.setContentAreaFilled(false);</span><br><span class="line">            rightButton.setFocusPainted(false);</span><br><span class="line">        &#125;</span><br><span class="line">        rightButton.addActionListener(new ActionListener()</span><br><span class="line">        &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void actionPerformed(ActionEvent arg0)</span><br><span class="line">            &#123;</span><br><span class="line">                max = sp.getHorizontalScrollBar().getMaximum()</span><br><span class="line">                        - sp.getHorizontalScrollBar().getModel().getExtent();// 得到滚动轴</span><br><span class="line">                                                                                // 最大滑动刻度</span><br><span class="line">                moveMinX = index * LIST_CELL_WIDTH &gt; 0 ? index</span><br><span class="line">                        * LIST_CELL_WIDTH : 0;</span><br><span class="line">                moveMaxX = moveMinX + LIST_CELL_WIDTH &gt; max ? max : moveMinX</span><br><span class="line">                        + LIST_CELL_WIDTH;</span><br><span class="line">                if (moveMinX &lt; max)</span><br><span class="line">                &#123;</span><br><span class="line">                    if (timer2 == null)</span><br><span class="line">                    &#123;</span><br><span class="line">                        timer2 = new Timer(currentResolution, action2);</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (!timer2.isRunning())</span><br><span class="line">                    &#123;</span><br><span class="line">                        timer2.start();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        rightButton.setPreferredSize(new Dimension(48, 50));</span><br><span class="line">        return rightButton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ActionListener action1 = new ActionListener()</span><br><span class="line">    &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void actionPerformed(ActionEvent e)</span><br><span class="line">        &#123;</span><br><span class="line">            y -= 8;</span><br><span class="line">            if (y &lt;= moveMinX)</span><br><span class="line">            &#123;</span><br><span class="line">                y = moveMinX;</span><br><span class="line">                timer1.stop();</span><br><span class="line">                if (index &gt; 0)</span><br><span class="line">                &#123;</span><br><span class="line">                    index--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            sp.getHorizontalScrollBar().setValue(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    private ActionListener action2 = new ActionListener()</span><br><span class="line">    &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void actionPerformed(ActionEvent e)</span><br><span class="line">        &#123;</span><br><span class="line">            y += 8;</span><br><span class="line">            if (y &gt;= moveMaxX)</span><br><span class="line">            &#123;</span><br><span class="line">                y = moveMaxX;</span><br><span class="line">                timer2.stop();</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">            sp.getHorizontalScrollBar().setValue(y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new RollingFrame();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/%E4%BD%BF%E7%94%A8jxl%E5%AF%BC%E5%87%BAexcel/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    使用jxl导出excel
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">java正则表达式</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            John Doe &copy; 2019 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

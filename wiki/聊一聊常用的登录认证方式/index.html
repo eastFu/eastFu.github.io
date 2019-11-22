@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>聊一聊常用的登录认证方式 | Hexo</title>
+    
+    
+        <meta name="keywords" content="编程" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="介绍 登录认证几乎是任何一个系统的标配，web 系统、APP、PC 客户端等，好多都需要注册、登录、授权认证。  以一个电商系统，假设淘宝为例，如果我们想要下单，首先需要注册一个账号。拥有了账号之后，我们需要输入用户名（比如手机号或邮箱）、密码完成登录过程。之后如果你在一段时间内再次进入系统，是不需要输入用户名和密码的，只有在连续长时间不登录的情况下（例如一个月没登录过）访问系统，再次需要输入用户">
+<meta name="keywords" content="编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊一聊常用的登录认证方式">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;wiki&#x2F;%E8%81%8A%E4%B8%80%E8%81%8A%E5%B8%B8%E7%94%A8%E7%9A%84%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="介绍 登录认证几乎是任何一个系统的标配，web 系统、APP、PC 客户端等，好多都需要注册、登录、授权认证。  以一个电商系统，假设淘宝为例，如果我们想要下单，首先需要注册一个账号。拥有了账号之后，我们需要输入用户名（比如手机号或邮箱）、密码完成登录过程。之后如果你在一段时间内再次进入系统，是不需要输入用户名和密码的，只有在连续长时间不登录的情况下（例如一个月没登录过）访问系统，再次需要输入用户">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-22T06:44:52.340Z">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.ico" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Hexo</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            编程
+                        </a>
+                         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            IDE
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/IDEA%E7%89%88%E6%9C%AC-Ultimate%E3%80%81Community%E3%80%81EAP/">IDEA版本: Ultimate、Community、EAP</a></li>  <li class="file"><a href="/wiki/markdown%E7%BC%96%E8%BE%91%E5%99%A8-Haroopad/">markdown编辑器:Haroopad</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Java
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/java%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">java正则表达式</a></li>  <li class="file"><a href="/wiki/swing%E5%AE%9E%E7%8E%B0%E6%A8%AA%E5%90%91%E6%BB%9A%E5%8A%A8%E7%AA%97%E5%8F%A3/">swing实现横向滚动窗口</a></li>  <li class="file"><a href="/wiki/%E4%BD%BF%E7%94%A8jxl%E5%AF%BC%E5%87%BAexcel/">使用jxl导出excel</a></li>  <li class="file"><a href="/wiki/java%E5%AF%B9xml%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C/">java对xml文件的操作</a></li>  <li class="file"><a href="/wiki/hibernate%E6%8F%92%E5%85%A5mysql%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/">hibernate插入mysql中文乱码问题</a></li>  <li class="file"><a href="/wiki/%E5%85%B3%E4%BA%8Espring-mvc%E8%AF%B7%E6%B1%82%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/">关于spring mvc请求乱码问题分析</a></li>  <li class="file"><a href="/wiki/%E7%B2%BE%E7%AE%80JRE/">精简JRE</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Node.js
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E8%A7%A3%E5%86%B3npm%E5%AE%89%E8%A3%85%E9%80%9F%E5%BA%A6%E6%85%A2%E7%9A%84%E9%97%AE%E9%A2%98/">解决npm安装速度慢的问题</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            OAuth
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/OAuth-2-0%E4%BB%8B%E7%BB%8D-%E8%BD%AC/">OAuth 2.0介绍[转]</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Python
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E8%B8%A9%E5%9D%91-python-base64/">踩坑:python base64</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            RabbitMQ
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E5%88%9D%E8%AF%86RabbitMQ/">初识RabbitMQ</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Redis
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%B8%80-Linux%E7%8E%AF%E5%A2%83%E4%B8%8Bredis%E7%9A%84%E5%AE%89%E8%A3%85/">入门(一)Linux环境下redis的安装</a></li>  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%BA%8C-Windows%E7%8E%AF%E5%A2%83%E4%B8%8Bredis%E7%9A%84%E5%AE%89%E8%A3%85/">入门(二)Windows环境下redis的安装</a></li>  <li class="file"><a href="/wiki/%E5%85%A5%E9%97%A8-%E4%B8%89-%E8%AF%A6%E8%A7%A3redis%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">入门(三)详解redis配置文件</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Zookeeper
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/zookeeper%E7%9A%84%E6%96%AD%E7%BA%BF%E9%87%8D%E8%BF%9E%E5%AE%9E%E7%8E%B0/">zookeeper的断线重连实现</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            spring
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/Spring-Boot%E4%B8%AD%E7%9A%84banner-txt/">spring boot中的banner.txt</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            其它
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/cmd%E5%91%BD%E4%BB%A4%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/">cmd命令右键菜单</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            安全
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/wiki/%E8%81%8A%E4%B8%80%E8%81%8A%E5%B8%B8%E7%94%A8%E7%9A%84%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F/">聊一聊常用的登录认证方式</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            正则表达式
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/">正则表达式的那些事儿</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            网络
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/wiki/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTTP%E5%92%8CWebSocket/">深入浅出Http和WebSocket</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-聊一聊常用的登录认证方式" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/%E5%AE%89%E5%85%A8/">安全</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/wiki/%E8%81%8A%E4%B8%80%E8%81%8A%E5%B8%B8%E7%94%A8%E7%9A%84%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F/">
+            <time datetime="2018-09-30T11:26:08.000Z" itemprop="datePublished">2018-09-30</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/raw/writing/source/_posts/聊一聊常用的登录认证方式.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/edit/writing/source/_posts/聊一聊常用的登录认证方式.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/zthxxx/Wiki-site/commits/writing/source/_posts/聊一聊常用的登录认证方式.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            聊一聊常用的登录认证方式
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">Catalogue</strong>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的认证方式"><span class="toc-number">2.</span> <span class="toc-text">常用的认证方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OAuth-认证"><span class="toc-number">2.1.</span> <span class="toc-text">OAuth 认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-Session认证"><span class="toc-number">2.2.</span> <span class="toc-text">Cookie-Session认证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie-Session改造版"><span class="toc-number">2.3.</span> <span class="toc-text">Cookie-Session改造版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于JWT的Token认证"><span class="toc-number">2.4.</span> <span class="toc-text">基于JWT的Token认证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考资料"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            
+        
+        
+            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>登录认证几乎是任何一个系统的标配，web 系统、APP、PC 客户端等，好多都需要注册、登录、授权认证。</p>
+</blockquote>
+<p>以一个电商系统，假设淘宝为例，如果我们想要下单，首先需要注册一个账号。拥有了账号之后，我们需要输入用户名（比如手机号或邮箱）、密码完成登录过程。之后如果你在一段时间内再次进入系统，是不需要输入用户名和密码的，只有在连续长时间不登录的情况下（例如一个月没登录过）访问系统，再次需要输入用户名和密码。如果使用频率很频繁，通常是一年都不用再输一次密码，所以经常在换了一台电脑或者一部手机之后，一些经常使用的网站或 APP 不记得密码了。</p>
+<p>提炼出来整个过程大概就是如下几步：</p>
+<blockquote>
+<p>首次使用，需要通过邮箱或手机号注册；<br>注册完成后，需要提供用户名和密码完成登录；<br>下次再使用，通常不会再次输入用户名和密码即可直接进入系统并使用其功能（除非连续长时间未使用）；</p>
+</blockquote>
+<h2 id="常用的认证方式"><a href="#常用的认证方式" class="headerlink" title="常用的认证方式"></a>常用的认证方式</h2><h3 id="OAuth-认证"><a href="#OAuth-认证" class="headerlink" title="OAuth 认证"></a>OAuth 认证</h3><p>OAuth 认证比较常见的就是微信登录、微博登录、qq登录等，简单来说就是利用这些比较权威的网站或应用开放的 API 来实现用户登录，用户可以不用在你的网站或应用上注册账号，直接用已有的微信、微博、qq 等账号登录。</p>
+<p>这一样一来，即省了用户注册的时间，又简化了你的系统的账号体系。从而既可以提高用户注册率可以节省开发时间，同时，安全性也有了保障。</p>
+<p>维基百科对它的解释摘要如下：</p>
+<blockquote>
+<p>OAuth允许用户提供一个令牌，而不是用户名和密码来访问他们存放在特定服务提供者的数据。每一个令牌&gt;授权一个特定的网站（例如，视频编辑网站)在特定的时段（例如，接下来的2小时内）内访问特定的资源（例如仅仅是某一相册中的视频）。这样，OAuth让用户可以授权第三方网站访问他们存储在另外服务提供者的某些特定信息，而非所有内容。</p>
+</blockquote>
+<p>假设我们开发了一个电商平台，并集成了微信登录，以这个场景为例，说一下 OAuth 的工作原理。</p>
+<p>讲之前需要了解其中涉及到的几个角色：</p>
+<ul>
+<li>用户：即使用我们平台的用户</li>
+<li>用户终端：即最终用户使用的 APP 端或 web 端</li>
+<li>应用服务器端：即我们的服务器端</li>
+<li>授权服务器端：这里就是微信处理授权请求的服务器</li>
+</ul>
+<p>好的，接下来开始在我们的电商平台web端实现微信登录功能。微信网页授权是授权码模式（authorization code）的 OAuth 授权模式。</p>
+<ul>
+<li>我们电商平台的用户过来登录，常用场景是点击“微信登录”按钮；</li>
+<li>接下来，用户终端将用户引导到微信授权页面；</li>
+<li>用户同意授权，应用服务器重定向到之前设置好的 redirect_uri （应用服务器所在的地址），并附带上授权码（code）;</li>
+<li>应用服务器用上一步获取的 code 向微信授权服务器发送请求，获取 access_token，也就是上面说的令牌；</li>
+<li>之后应用服务器用上一步获取的 access_token 去请求微信授权服务器获取用户的基本信息，例如头像、昵称等；</li>
+</ul>
+<h3 id="Cookie-Session认证"><a href="#Cookie-Session认证" class="headerlink" title="Cookie-Session认证"></a>Cookie-Session认证</h3><p>早期互联网以 web 为主，客户端是浏览器，所以 Cookie-Session 方式最那时候最常用的方式，直到现在，一些 web 网站依然用这种方式做认证。</p>
+<p>认证过程大致如下：</p>
+<ul>
+<li>用户输入用户名、密码或者用短信验证码方式登录系统；</li>
+<li>服务端验证后，创建一个 Session 信息，并且将 SessionID 存到 cookie，发送回浏览器；</li>
+<li>下次客户端再发起请求，自动带上 cookie 信息，服务端通过 cookie 获取 Session 信息进行校验；</li>
+</ul>
+<p>弊端:</p>
+<ul>
+<li>只能在 web 场景下使用，如果是 APP 中，不能使用 cookie 的情况下就不能用了；</li>
+<li>即使能在 web 场景下使用，也要考虑跨域问题，因为 cookie 不能跨域；</li>
+<li>cookie 存在 CSRF（跨站请求伪造）的风险；</li>
+<li>如果是分布式服务，需要考虑 Session 同步问题；</li>
+</ul>
+<h3 id="Cookie-Session改造版"><a href="#Cookie-Session改造版" class="headerlink" title="Cookie-Session改造版"></a>Cookie-Session改造版</h3><p>由于传统的 Cookie-Session 认证存在诸多问题，可以把上面的方案改造一下。改动的地方如下：</p>
+<ul>
+<li><p>不用 cookie 做客户端存储，改用其他方式，web 下使用 local storage，APP 中使用客户端数据库，这样就实现了跨域，并且避免了 CSRF ;</p>
+</li>
+<li><p>服务端也不存 Session 了，把 Session 信息拿出来存到 Redis 等内存数据库中，这样即提高了速度，又避免了 Session 同步问题；<br>经过改造之后变成了如下的认证过程：</p>
+</li>
+<li><p>用户输入用户名、密码或者用短信验证码方式登录系统；</p>
+</li>
+<li><p>服务端经过验证，将认证信息构造好的数据结构存储到 Redis 中，并将 key 值返回给客户端；</p>
+</li>
+<li><p>客户端拿到返回的 key，存储到 local storage 或本地数据库；</p>
+</li>
+<li><p>下次客户端再次请求，把 key 值附加到 header 或者 请求体中；</p>
+</li>
+<li><p>服务端根据获取的 key，到 Redis 中获取认证信息；</p>
+</li>
+</ul>
+<h3 id="基于JWT的Token认证"><a href="#基于JWT的Token认证" class="headerlink" title="基于JWT的Token认证"></a>基于JWT的Token认证</h3><p>上面的方案虽然经过了改版，但还是需要客户端和服务器端维持一个状态信息，比如用 cookie 换 session ,或者用 key 换 Redis 的 value 信息，基于 JWT 的 Token 认证方案可以省去这个过程。</p>
+<p>JSON Web Token（JWT）是一个非常轻巧的规范。这个规范允许我们使用JWT在用户和服务器之间传递安全可靠的信息。</p>
+<p>认证过程</p>
+<ul>
+<li>依然是用户登录系统；</li>
+<li>服务端验证，将认证信息通过指定的算法（例如HS256）进行加密，例如对用户名和用户所属角色进行加密，加密私钥是保存在服务器端的，将加密后的结果发送给客户端，加密的字符串格式为三个”.” 分隔的字符串 Token，分别对应头部、载荷与签名，头部和载荷都可以通过 base64 解码出来，签名部分不可以；</li>
+<li>客户端拿到返回的 Token，存储到 local storage 或本地数据库；</li>
+<li>下次客户端再次发起请求，将 Token 附加到 header 中；</li>
+<li>服务端获取 header 中的 Token ，通过相同的算法对 Token 中的用户名和所属角色进行相同的加密验证，如果验证结果相同，则说明这个请求是正常的，没有被篡改。这个过程可以完全不涉及到查询 Redis 或其他存储；</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>使用 json 作为数据传输，有广泛的通用型，并且体积小，便于传输；</li>
+<li>不需要在服务器端保存相关信息；</li>
+<li>jwt 载荷部分可以存储业务相关的信息（非敏感的），例如用户信息、角色等；</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>综上所述，JWT 可以作为首选的认证方案。当然，具体的情况具体分析，还要看是不是适合真实的应用场景。除了上述的这些，涉及到信息安全的，建议全部采用 https 方式部署，采用 https 方式，信息很难被嗅探破解，对应用的安全性很重要。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><blockquote>
+<p>OAuth - <a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html</a></p>
+</blockquote>
+<blockquote>
+<p>JWT- [<a href="https://jwt.io/introduction/" target="_blank" rel="noopener">https://jwt.io/introduction/</a> <a href="http://blog.leapoahead.com/2015/09/06/understanding-jwt]" target="_blank" rel="noopener">http://blog.leapoahead.com/2015/09/06/understanding-jwt]</a>(<a href="https://jwt.io/introduction/" target="_blank" rel="noopener">https://jwt.io/introduction/</a> <a href="http://blog.leapoahead.com/2015/09/06/understanding-jwt" target="_blank" rel="noopener">http://blog.leapoahead.com/2015/09/06/understanding-jwt</a>)</p>
+</blockquote>
+<blockquote>
+<p>JWT Java 库- <a href="https://github.com/jwtk/jjwt" target="_blank" rel="noopener">https://github.com/jwtk/jjwt</a></p>
+</blockquote>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/wiki/%E5%88%9D%E8%AF%86RabbitMQ/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    初识RabbitMQ
+                
+            </div>
+        </a>
+    
+    
+        <a href="/wiki/OAuth-2-0%E4%BB%8B%E7%BB%8D-%E8%BD%AC/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">OAuth 2.0介绍[转]</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            John Doe &copy; 2019 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
