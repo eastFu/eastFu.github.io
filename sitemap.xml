@@ -16,6 +16,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/links/index.html</loc>
+    
+    <lastmod>2020-12-06</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2020-12-06</lastmod>
@@ -24,6 +31,13 @@
   
   <url>
     <loc>http://example.com/about/index.html</loc>
+    
+    <lastmod>2020-12-06</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/404.html</loc>
     
     <lastmod>2020-12-06</lastmod>
     
@@ -202,6 +216,20 @@
   </url>
   
   <url>
+    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/%E5%85%B6%E5%AE%83/</loc>
+    <lastmod>2020-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/OAuth/</loc>
+    <lastmod>2020-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/Java/</loc>
     <lastmod>2020-12-06</lastmod>
     <changefreq>daily</changefreq>
@@ -216,28 +244,14 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/spring/</loc>
-    <lastmod>2020-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/OAuth/</loc>
-    <lastmod>2020-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/%E5%85%B6%E5%AE%83/</loc>
-    <lastmod>2020-12-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/Zookeeper/</loc>
+    <lastmod>2020-12-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/spring/</loc>
     <lastmod>2020-12-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
