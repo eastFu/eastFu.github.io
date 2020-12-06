@@ -223,7 +223,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/IDE/</loc>
+    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/OAuth/</loc>
     <lastmod>2020-12-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -237,7 +237,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/OAuth/</loc>
+    <loc>http://example.com/categories/%E7%BC%96%E7%A8%8B/IDE/</loc>
     <lastmod>2020-12-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
