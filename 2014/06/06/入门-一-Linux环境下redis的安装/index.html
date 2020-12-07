@@ -25,13 +25,13 @@
 <meta property="og:site_name" content="eastFu">
 <meta property="og:description" content="关于redis Redis最为一款开源的key-value存储系统，自推出到现在一直受到编程人员的喜爱。它支持存储多种value类型，String 、List 、Set 、Zset 、Hash。这些数据类型都支持push&#x2F;pop、add&#x2F;remove 及取交集、并集、差集等操作，这些操作都是原子性的，而且Redis还有各种不同的排序方式。  Redis 的数据都是缓存在内存中，这样做是为了保证效率">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://raw.github.com/eastFu/docs/master/blog/redis-linux/redis-linux.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-linux/redis-linux.png">
 <meta property="article:published_time" content="2014-06-06T08:52:03.000Z">
-<meta property="article:modified_time" content="2020-12-05T08:55:25.549Z">
+<meta property="article:modified_time" content="2020-12-07T05:41:52.097Z">
 <meta property="article:author" content="eastFu">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://raw.github.com/eastFu/docs/master/blog/redis-linux/redis-linux.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-linux/redis-linux.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://example.com/2014/06/06/%E5%85%A5%E9%97%A8-%E4%B8%80-Linux%E7%8E%AF%E5%A2%83%E4%B8%8Bredis%E7%9A%84%E5%AE%89%E8%A3%85/index.html">
   
@@ -369,7 +369,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-3.2.8.tar.gz</span><br><span class="line">$ tar xzf redis-3.2.8.tar.gz</span><br><span class="line">$ cd redis-3.2.8</span><br><span class="line">$ make</span><br><span class="line">$ make install</span><br></pre></td></tr></table></figure>
 <h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>安装完成之后，进入src文件夹，你会发现脚本文件很多，为了操作方便我们将我们一会要使用到的脚本文件拷贝到一个目录同一进行管理：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 1. 创建两个文件夹 bin 、etc</span><br><span class="line"></span><br><span class="line">$ mkdir -p &#x2F;usr&#x2F;local&#x2F;redis&#x2F;bin</span><br><span class="line">$ mkdir -p &#x2F;usr&#x2F;local&#x2F;redis&#x2F;ect</span><br><span class="line"></span><br><span class="line"># 2. copy 脚本和配置文件</span><br><span class="line"></span><br><span class="line">$ mv &#x2F;lamp&#x2F;redis-3.2.8&#x2F;redis.conf &#x2F;usr&#x2F;local&#x2F;redis&#x2F;etc</span><br><span class="line">$ cd &#x2F;lamp&#x2F;redis-3.2.8&#x2F;src</span><br><span class="line">$ mv mkreleasehdr.sh redis-benchmark redis-check-aof redis-check-dump redis-cli redis-server &#x2F;usr&#x2F;local&#x2F;redis&#x2F;bin</span><br><span class="line"></span><br><span class="line">#3. 启动Redis</span><br><span class="line"></span><br><span class="line">$ cd &#x2F;usr&#x2F;local&#x2F;redis&#x2F;bin</span><br><span class="line">$ .&#x2F;redis-server</span><br></pre></td></tr></table></figure>
-<p>下面是启动后的截图（redis 默认端口 6379）：<br><img src="http://raw.github.com/eastFu/docs/master/blog/redis-linux/redis-linux.png" alt="启动效果图"></p>
+<p>下面是启动后的截图（redis 默认端口 6379）：<br><img src="https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-linux/redis-linux.png" alt="启动效果图"></p>
 <h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>如上图所示，redis已经成功启动，但是这里有三个WARNING 警告项，请不要忽略，下面介绍一下解决方法：</p>
 <ul>
 <li>第一个错误大概是说somaxconn的值128设置过小，从/proc/sys/net/core/somaxconn这个路径也可大概知道这个值的设置是关于网络连接中某个最大值的限定设置，此值表示网络连接的队列大小，在配置文件redis.conf中的“tcp-backlog 511”就配置在高并发环境下的最大队列大小，此值受限于系统的somaxconn与tcp_max_syn_backlog这两个值，所以应该把这两个内核参数值调大，具体解决方法如下：</li>
