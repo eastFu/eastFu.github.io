@@ -14,14 +14,14 @@ date: 2018-09-26 20:55:51
 
 > 本文对OAuth 2.0的设计思路和运行流程，做一个简明通俗的解释，主要参考材料为 RFC 6749。
 
-![OAuth Logo](https://raw.github.com/eastFu/docs/master/blog/oauth/oauth-logo.png)
+![OAuth Logo](https://raw.githubusercontent.com/eastFu/docs/master/blog/oauth/oauth-logo.png)
 ## 应用场景
 
 为了理解OAuth的适用场合，让我举一个假设的例子。
 
 有一个”云冲印”的网站，可以将用户储存在Google的照片，冲印出来。用户为了使用该服务，必须让”云冲印”读取自己储存在Google上的照片。
 
-![云冲印](https://raw.github.com/eastFu/docs/master/blog/oauth/云冲洗.png)
+![云冲印](https://raw.githubusercontent.com/eastFu/docs/master/blog/oauth/云冲洗.png)
 
 问题是只有得到用户的授权，Google才会同意”云冲印”读取这些照片。那么，”云冲印”怎样获得用户的授权呢？
 

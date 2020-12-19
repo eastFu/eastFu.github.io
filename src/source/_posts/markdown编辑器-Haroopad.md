@@ -15,7 +15,7 @@ date: 2018-09-02 18:19:53
 
 操作界面：
 
-![界面](http://raw.github.com/eastFu/docs/master/blog/haroopad/haroopad.jpg)
+![界面](https://raw.githubusercontent.com/eastFu/docs/master/blog/haroopad/haroopad.jpg)
 
 功能：可以快捷插入标题、图标、超链接等等，而且很方便的切换主题。你值得拥有！
 
@@ -24,7 +24,7 @@ date: 2018-09-02 18:19:53
 ## 注意事项
 因为这款软件比较小众，所以坐着应该很久没有维护了，官网放出的下载连接是v0.13.1 , 但是这款软件有bug ，中文不现实的问题，如图：
 
-![错误页面](http://raw.github.com/eastFu/docs/master/blog/haroopad/haroopad-error.png)
+![错误页面](https://raw.githubusercontent.com/eastFu/docs/master/blog/haroopad/haroopad-error.png)
 
 
 所以请下载v0.13 之前的版本，下面是下载地址：

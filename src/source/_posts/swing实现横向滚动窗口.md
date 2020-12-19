@@ -14,7 +14,7 @@ date: 2013-02-26 10:24:57
 上网看视频的时候都看见过，一个视频滚动的窗体，通过点击按钮视频可以产生横向滚动效果，下面自己用swing写了一个类似的功能窗口。
 
 效果图：
-![效果图](https://raw.github.com/eastFu/docs/master/blog/swing/swing.png)
+![效果图](https://raw.githubusercontent.com/eastFu/docs/master/blog/swing/swing.png)
 
 ## 代码
 

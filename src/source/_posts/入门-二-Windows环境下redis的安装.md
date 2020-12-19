@@ -17,44 +17,44 @@ date: 2014-06-07 19:05:10
 
 官网截图：
 
-![官网](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win.png)
+![官网](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win.png)
 
 github截图：
 
-![github](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-github.png)
+![github](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-github.png)
 
 ## 下载与安装
 截至到目前最新版本是3.2.100 ，这里就使用这个版本来进行安装，下载 Redis-x64-3.2.100.msi ，双击开始安装：
 
-![步骤1](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-1.png)
+![步骤1](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-1.png)
 
-![步骤2](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-2.png)
+![步骤2](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-2.png)
 
-![步骤3](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-3.png)
+![步骤3](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-3.png)
 
-![步骤4](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-4.png)
+![步骤4](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-4.png)
 
-![步骤5](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-5.png)
+![步骤5](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-5.png)
 
-![步骤6](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-6.png)
+![步骤6](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-6.png)
 
-![步骤7](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-7.png)
+![步骤7](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-7.png)
 
-![步骤8](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-8.png)
+![步骤8](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-8.png)
 
 安装完毕，我们看一下目录文件：
 
-![目录](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-9.png)
+![目录](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-9.png)
 
 ## redis启动
 ```
 redis-server  redis.windows.conf
 ```
 
-![启动效果图](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-10.png)
+![启动效果图](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-10.png)
 
 ## redis-cli的使用
 
 双击打开 redis-cli.exe，我们可以在命令行使用redis命令来进行操作：
 
-![命令](http://raw.github.com/eastFu/docs/master/blog/redis-win/redis-win-11.png)
+![命令](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-win/redis-win-11.png)

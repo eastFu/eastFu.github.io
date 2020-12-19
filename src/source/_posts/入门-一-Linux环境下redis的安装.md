@@ -42,7 +42,7 @@ $ cd /usr/local/redis/bin
 $ ./redis-server
 ```
 下面是启动后的截图（redis 默认端口 6379）：
-![启动效果图](http://raw.github.com/eastFu/docs/master/blog/redis-linux/redis-linux.png)
+![启动效果图](https://raw.githubusercontent.com/eastFu/docs/master/blog/redis-linux/redis-linux.png)
 
 ## 问题分析
 如上图所示，redis已经成功启动，但是这里有三个WARNING 警告项，请不要忽略，下面介绍一下解决方法：

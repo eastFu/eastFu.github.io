@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>kafka的安装 | 咚呲嗒呲的博客</title>
+  <meta name="description" content="kafka的安装1.下载安装 kafka的安装需要依赖zookeeper，虽然kafka自带了zookeeper，但是为了方便维护，推荐自己安装zookeeper  1234567891011121314151617181920212223242526272829303132333435363738394041#zookeeper下载地址：https:&#x2F;&#x2F;zookeeper.a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kafka的安装">
+<meta property="og:url" content="http://xiaodongzi.cn/2018/10/20/kafka%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="eastFu">
+<meta property="og:description" content="kafka的安装1.下载安装 kafka的安装需要依赖zookeeper，虽然kafka自带了zookeeper，但是为了方便维护，推荐自己安装zookeeper  1234567891011121314151617181920212223242526272829303132333435363738394041#zookeeper下载地址：https:&#x2F;&#x2F;zookeeper.a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-10-20T11:26:08.000Z">
+<meta property="article:modified_time" content="2020-12-19T04:04:52.704Z">
+<meta property="article:author" content="eastFu">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xiaodongzi.cn/2018/10/20/kafka%E5%AE%89%E8%A3%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="eastFu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/eastFu" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">eastFu</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/eastFu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/storm/">storm</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">23</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/IDE/">IDE</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/Java/">Java</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/Node-js/">Node.js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/OAuth/">OAuth</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/RabbitMQ/">RabbitMQ</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/Redis/">Redis</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/Zookeeper/">Zookeeper</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/kafka/">kafka</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/%E5%85%B6%E5%AE%83/">其它</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/%E5%AE%89%E5%85%A8/">安全</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-list-count">1</span></li></ul></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">24</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 13px;">编程</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/02/">二月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/04/">四月 2011</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/storm/">storm</a>
+              </p>
+              <p class="item-title">
+                <a href="/2019/02/26/storm%E5%AE%89%E8%A3%85/" class="title">storm 安装部署</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-02-26T10:24:57.000Z" itemprop="datePublished">2019-02-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/kafka/">kafka</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/20/kafka%E5%AE%89%E8%A3%85/" class="title">kafka的安装</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-20T11:26:08.000Z" itemprop="datePublished">2018-10-20</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" class="title">正则表达式的那些事儿</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-15T14:10:55.000Z" itemprop="datePublished">2018-10-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C/">网络</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/12/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAHTTP%E5%92%8CWebSocket/" class="title">深入浅出Http和WebSocket</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-12T14:46:19.000Z" itemprop="datePublished">2018-10-12</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="icon icon-angle-right"></i><a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/RabbitMQ/">RabbitMQ</a>
+              </p>
+              <p class="item-title">
+                <a href="/2018/10/10/%E5%88%9D%E8%AF%86RabbitMQ/" class="title">初识RabbitMQ</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-10-10T11:33:24.000Z" itemprop="datePublished">2018-10-10</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#kafka%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">kafka的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">1.下载安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-number">1.2.</span> <span class="toc-text">2.配置文件修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%90%AF%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">3.启动命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-kafka%E6%97%A5%E5%BF%97"><span class="toc-number">1.4.</span> <span class="toc-text">4.kafka日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-kafka%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.5.</span> <span class="toc-text">5.kafka的一些基本概念</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-kafka安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      kafka的安装
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/10/20/kafka%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2018-10-20T11:26:08.000Z" itemprop="datePublished">2018-10-20</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>►<a class="article-category-link" href="/categories/%E7%BC%96%E7%A8%8B/kafka/">kafka</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/10/20/kafka%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="kafka的安装"><a href="#kafka的安装" class="headerlink" title="kafka的安装"></a>kafka的安装</h1><h2 id="1-下载安装"><a href="#1-下载安装" class="headerlink" title="1.下载安装"></a>1.下载安装</h2><blockquote>
+<p>kafka的安装需要依赖zookeeper，虽然kafka自带了zookeeper，但是为了方便维护，推荐自己安装zookeeper</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#zookeeper下载地址：</span><br><span class="line">https:&#x2F;&#x2F;zookeeper.apache.org&#x2F;releases.html</span><br><span class="line"></span><br><span class="line">#解压缩zookeeper</span><br><span class="line">tar -zxvf apache-zookeeper-3.6.2-bin.tar.gz</span><br><span class="line"></span><br><span class="line">##修改配置 conf&#x2F;zoo.cfg</span><br><span class="line">dataDir&#x3D;&#x2F;data&#x2F;zk&#x2F;node1&#x2F;data</span><br><span class="line">clientPort&#x3D;2181</span><br><span class="line"></span><br><span class="line">server.1&#x3D;localhost:2287:3387</span><br><span class="line">server.2&#x3D;localhost:2288:3388</span><br><span class="line">server.3&#x3D;localhost:2289:3389</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">echo 1 &gt;&gt; &#x2F;data&#x2F;zk&#x2F;node1&#x2F;data&#x2F;myid</span><br><span class="line">echo 2 &gt;&gt; &#x2F;data&#x2F;zk&#x2F;node2&#x2F;data&#x2F;myid</span><br><span class="line">echo 3 &gt;&gt; &#x2F;data&#x2F;zk&#x2F;node3&#x2F;data&#x2F;myid</span><br><span class="line"></span><br><span class="line">##启动zookeeper</span><br><span class="line">.&#x2F;zkServer.sh start ..&#x2F;conf&#x2F;zoo1.cfg</span><br><span class="line">.&#x2F;zkServer.sh start ..&#x2F;conf&#x2F;zoo2.cfg</span><br><span class="line">.&#x2F;zkServer.sh start ..&#x2F;conf&#x2F;zoo3.cfg</span><br><span class="line"></span><br><span class="line">#kafka下载地址：</span><br><span class="line">http:&#x2F;&#x2F;kafka.apache.org&#x2F;downloads</span><br><span class="line"></span><br><span class="line"># 解压缩</span><br><span class="line">tar -zxvf kafka_2.11-2.2.2.tgz</span><br><span class="line"></span><br><span class="line">#修改 conf&#x2F;server.properties</span><br><span class="line">broker.id&#x3D;0</span><br><span class="line">listeners&#x3D;PLAINTEXT:&#x2F;&#x2F;hostname:9092</span><br><span class="line">log.dirs&#x3D;&#x2F;data&#x2F;kafka-logs&#x2F;kafka3</span><br><span class="line">zookeeper.connect&#x3D;zk1:2181,zk3:2181,zk3:2181</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#启动</span><br><span class="line">.&#x2F;kafka-server-start.sh -daemon ..&#x2F;config&#x2F;server.properties</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-配置文件修改"><a href="#2-配置文件修改" class="headerlink" title="2.配置文件修改"></a>2.配置文件修改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">broker.id&#x3D;0  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样</span><br><span class="line"></span><br><span class="line">port&#x3D;19092 #当前kafka对外提供服务的端口默认是9092</span><br><span class="line"></span><br><span class="line">host.name&#x3D;192.168.7.100 #这个参数默认是关闭的，在0.8.1有个bug，DNS解析问题，失败率的问题。</span><br><span class="line"></span><br><span class="line">num.network.threads&#x3D;3 #这个是borker进行网络处理的线程数</span><br><span class="line"></span><br><span class="line">num.io.threads&#x3D;8 #这个是borker进行I&#x2F;O处理的线程数</span><br><span class="line"></span><br><span class="line">log.dirs&#x3D;&#x2F;opt&#x2F;kafka&#x2F;kafkalogs&#x2F; #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num.io.threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个</span><br><span class="line"></span><br><span class="line">socket.send.buffer.bytes&#x3D;102400 #发送缓冲区buffer大小，数据不是一下子就发送的，先回存储到缓冲区了到达一定的大小后在发送，能提高性能</span><br><span class="line"></span><br><span class="line">socket.receive.buffer.bytes&#x3D;102400 #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘</span><br><span class="line"></span><br><span class="line">socket.request.max.bytes&#x3D;104857600 #这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小</span><br><span class="line"></span><br><span class="line">num.partitions&#x3D;1 #默认的分区数，一个topic默认1个分区数</span><br><span class="line"></span><br><span class="line">log.retention.hours&#x3D;168 #默认消息的最大持久化时间，168小时，7天</span><br><span class="line"></span><br><span class="line">message.max.byte&#x3D;5242880  #消息保存的最大值5M</span><br><span class="line"></span><br><span class="line">default.replication.factor&#x3D;2  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务</span><br><span class="line"></span><br><span class="line">replica.fetch.max.bytes&#x3D;5242880  #取消息的最大直接数</span><br><span class="line"></span><br><span class="line">log.segment.bytes&#x3D;1073741824 #这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新起一个文件</span><br><span class="line"></span><br><span class="line">log.retention.check.interval.ms&#x3D;300000 #每隔300000毫秒去检查上面配置的log失效时间（log.retention.hours&#x3D;168 ），到目录查看是否有过期的消息如果有，删除</span><br><span class="line"></span><br><span class="line">log.cleaner.enable&#x3D;false #是否启用log压缩，一般不用启用，启用的话可以提高性能</span><br><span class="line"></span><br><span class="line">zookeeper.connect&#x3D;192.168.7.100:12181,192.168.7.101:12181,192.168.7.107:1218 #设置zookeeper的连接端口</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-启动命令"><a href="#3-启动命令" class="headerlink" title="3.启动命令"></a>3.启动命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#启动</span><br><span class="line"></span><br><span class="line">.&#x2F;kafka-server-start.sh -daemon ..&#x2F;config&#x2F;server.properties</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">kafka1&#x2F;bin&#x2F;kafka-server-start.sh -daemon kafka1&#x2F;config&#x2F;server.properties</span><br><span class="line">kafka2&#x2F;bin&#x2F;kafka-server-start.sh -daemon kafka2&#x2F;config&#x2F;server.properties</span><br><span class="line">kafka3&#x2F;bin&#x2F;kafka-server-start.sh -daemon kafka3&#x2F;config&#x2F;server.properties</span><br><span class="line"></span><br><span class="line">#暂停</span><br><span class="line">kafka1&#x2F;bin&#x2F;kafka-server-stop.sh</span><br><span class="line">kafka2&#x2F;bin&#x2F;kafka-server-stop.sh</span><br><span class="line">kafka3&#x2F;bin&#x2F;kafka-server-stop.sh</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#创建Topic</span><br><span class="line"></span><br><span class="line">.&#x2F;kafka-topics.sh --create --zookeeper 192.168.7.100:12181 --replication-factor 2 --partitions 1 --topic shuaige</span><br><span class="line"></span><br><span class="line">#解释</span><br><span class="line"></span><br><span class="line">--replication-factor 2   #复制两份</span><br><span class="line"></span><br><span class="line">--partitions 1 #创建1个分区</span><br><span class="line"></span><br><span class="line">--topic #主题为shuaige</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#39;&#39;&#39;在一台服务器上创建一个发布者&#39;&#39;&#39;</span><br><span class="line"></span><br><span class="line">#创建一个broker，发布者</span><br><span class="line"></span><br><span class="line">.&#x2F;kafka-console-producer.sh --broker-list 192.168.7.100:19092 --topic shuaige</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#在一台服务器上创建一个订阅者</span><br><span class="line"></span><br><span class="line">.&#x2F;kafka-console-consumer.sh --zookeeper localhost:12181 --topic shuaige --from-beginning</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看topic</span><br><span class="line"></span><br><span class="line">.&#x2F;kafka-topics.sh --list --zookeeper localhost:12181</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看topic状态</span><br><span class="line"></span><br><span class="line">&#x2F;kafka-topics.sh --describe --zookeeper localhost:12181 --topic shuaige</span><br><span class="line"></span><br><span class="line">#下面是显示信息</span><br><span class="line"></span><br><span class="line">Topic:ssports    PartitionCount:1    ReplicationFactor:2    Configs:</span><br><span class="line"></span><br><span class="line">    Topic: shuaige    Partition: 0    Leader: 1    Replicas: 0,1    Isr: 1</span><br><span class="line"></span><br><span class="line">#分区为为1  复制因子为2   他的  shuaige的分区为0 </span><br><span class="line"></span><br><span class="line">#Replicas: 0,1   复制的为0，1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-kafka日志"><a href="#4-kafka日志" class="headerlink" title="4.kafka日志"></a>4.kafka日志</h2><blockquote>
+<p>可以通过配置server.properties文件中配置log.dirs参数来指定kafka的日志地址</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">server.log #kafka的运行日志</span><br><span class="line"></span><br><span class="line">state-change.log  #kafka他是用zookeeper来保存状态，所以他可能会进行切换，切换的日志就保存在这里</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">controller.log #kafka选择一个节点作为“controller”,当发现有节点down掉的时候它负责在游泳分区的所有节点中选择新的leader,这使得Kafka可以批量的高效的管理所有分区节点的主从关系。如果controller down掉了，活着的节点中的一个会备切换为新的controller.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-kafka的一些基本概念"><a href="#5-kafka的一些基本概念" class="headerlink" title="5.kafka的一些基本概念"></a>5.kafka的一些基本概念</h2><ul>
+<li><p>consumer 消费者：从消息队列中请求消息的客户端应用程序</p>
+</li>
+<li><p>producer 生产者：向broker发布消息的应用程序</p>
+</li>
+<li><p>broker AMQP服务端：用来接收生产者发送的消息并将这些消息路由给服务器中的队列，便于kfafka将生产者发送的消息，动态的添加到磁盘并给每一条消息一个偏移量，所以对于kafka一个broker就是一个应用程序的实例,即一个kafka节点。</p>
+</li>
+<li><p>partition 分区：一个Topic中的消息数据按照多个分区组织，分区是kafka消息队列组织的最小单位，一个分区可以看作是一个FIFO（ First Input First Output的缩写，先入先出队列）的队列。</p>
+</li>
+<li><p>topic 主题：一个主题类似新闻中的体育、娱乐、教育等分类概念，在实际工程中通常一个业务一个主题</p>
+</li>
+<li><p>replication factor 副本因子：推送到kafka的消息都进行了持久化，集群模式为了防止数据丢失，需要将消息数据进行复制，副本因子即为消息数据的复制个数，类比hadoop。</p>
+</li>
+<li><p>controller 控制器：类似于hadoop的hdfs中的namenode，负责消息副本和分区leader的管理，一套kafka集群启动后选举出一个broker节点作为controller。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://xiaodongzi.cn/2018/10/20/kafka%E5%AE%89%E8%A3%85/" title="kafka的安装" target="_blank" rel="external">http://xiaodongzi.cn/2018/10/20/kafka%E5%AE%89%E8%A3%85/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/eastFu" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/eastFu" target="_blank"><span class="text-dark">eastFu</span><small class="ml-1x"></small></a></h3>
+        <div>码农</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/02/26/storm%E5%AE%89%E8%A3%85/" title="storm 安装部署"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/10/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/" title="正则表达式的那些事儿"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">
+        <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/eastFu" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
